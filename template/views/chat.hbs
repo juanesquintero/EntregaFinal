@@ -1,0 +1,46 @@
+{{>header}}
+    <div style="margin-left: 10%; margin-right: 10%;">
+    <h3>Sala de Chat o Foro</h3>
+        <br>
+        <center>{{{mensaje}}}</center>
+        <br>
+        <form id="formulario" data-toggle="validator" action="/chat" method="GET" >
+            {{#if avatar}}<img src="data:img/png;base64,{{avatar}}" alt="Avatar" width="50" height="50">    
+            {{/if}}
+            <input type="hidden" id="nombre" name="nombre" value="{{nombre}}" >
+            <label>{{nombre}}</label>
+            <textarea id="mensaje" name="mensaje" class="form-control" rows="4" placeholder="Mensaje al foro" required></textarea>
+            <br>
+            <button>Enviar Mensaje</button>
+        </form>
+        <div id="chat"  style="margin-left: 5%;" ></div>
+    </div>
+    </center>
+     <script src="socket.io/socket.io.js"></script>
+    <script>
+        socket = io() 
+        //Chat foro
+        const formulario = document.querySelector('#formulario')
+        const nombre = formulario.querySelector('#nombre')
+        const mensaje = formulario.querySelector('#mensaje')
+        const chat = document.querySelector('#chat')
+
+        formulario.addEventListener('submit', (datos)=>{
+            datos.preventDefault()
+            socket.emit("mensaje",{nombre: nombre.value, mensaje: mensaje.value}, ()=>{
+                mensaje.value = ""
+                mensaje.focus()
+            })
+        })
+        socket.on("mensaje",(text)=>{
+            chat.innerHTML = text + '<br>'
+        })
+
+        //Inicio
+        chat.innerHTML == '' ? socket.emit("inicio") :null
+        socket.on("inicio",(text)=>{
+            chat.innerHTML = text
+        })
+
+    </script>
+{{>footer}}

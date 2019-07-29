@@ -1,0 +1,40 @@
+{{>header}}
+<div style="margin-left: 30px; margin-right: 40px" >
+    <h4 class="form-group text-center">Crear un curso</h4>
+    <form data-toggle="validator" style="margin-left: 30px; margin-right: 40px" action="/crearCurso" method="POST"> 
+            <!--Campos del CRUD cursos-->
+            <div class="form-group row">
+                <div class="col-sm-1">
+                <input type="number" min="1" name="id" class="form-control input-sm" maxlength="2" placeholder="ID" required>
+           </div>
+            <div class="col-sm-5">
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
+           </div>
+            <div class="col-sm-2">
+               <select name="modalidad" class="browser-default custom-select" >
+                    <option disabled selected>Modalidad</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Virtual">Virtual</option>
+                </select>
+            </div>
+              <div class="col-sm-2">
+                <input type="number"  min="0" name="intensidad" class="form-control input-sm" placeholder="Intesidad" >
+           </div>
+            </div>
+            
+            <div class="form-group row">
+            <div class="col-sm-6">
+                <textarea name="descripcion" class="form-control" rows="3" placeholder="Descripcion" required></textarea>
+           </div>
+           <div class="col-sm-4">
+                <input type="number" min="0" name="valor" class="form-control" placeholder="Valor" required>
+           </div>
+            </div>
+            <!--Boton para validar campos-->
+            <div class="text-center">
+                <input type="submit" value="Crear Curso" on class="btn btn-success" />
+            </div>
+    </form>
+</div>
+    {{{mensaje}}}
+{{>footer}}

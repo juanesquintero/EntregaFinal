@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cursos de Extension</title>
+     <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- JQuery and Pooper.js-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">    
+</head>
+<body >
+    <header>
+      <!--Barra de navegacion-->
+      <span class="border border-success">
+    <nav class="navbar sticky-top navbar-expand-lg" style="border: 2px solid green;">
+        <a class="navbar-brand" href="http://www.tdea.edu.co/" >
+            <img src="http://www.tdea.edu.co/images/tdea/logos/logo-ppal.jpg">    
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item "><a href="/" class="nav-link text-dark">Inicio</a></li>
+                <li class="nav-item"><a href="/cursos" class="nav-link text-dark">Cursos</a></li>
+            {{#if sesion}}
+                <li class="nav-item"><a href="/chat" class="nav-link text-dark">Chat/Foro</a></li>
+                {{#if (equals rol 'Coordinador')}}
+                     <li class="nav-item"><a href="/crearCurso" class="nav-link text-dark">Crear Curso</a></li>
+                     <li class="nav-item"><a href="/modificarCurso" class="nav-link text-dark">Modificar Curso</a></li>
+                    <li class="nav-item"><a href="/inscritos" class="nav-link text-dark">Inscritos</a></li>
+                    </ul>
+                {{else}}
+                    <li class="nav-item"><a href="/inscribir" class="nav-link text-dark">Inscribir a Curso</a></li>
+                    </ul>
+                {{/if}}
+                <form style="margin-left: 20%" class="form-group row" action="/salir" method="GET">
+                        <h4>{{nombre}}</h4>
+                        <input style="margin-left: 5%" type="submit" value="Salir" class="btn btn-danger">
+                </form>
+            {{else}}
+            <li class="nav-item"><a href="/registrar" class="nav-link text-dark">Registrarse</a></li>
+            </ul>
+            <div style="margin-left: 15%" class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <form data-toggle="validator" class="form-group row" action="/ingresar" method="POST"> 
+                        <div class="col-sm 2">
+                            <input type="text" class="form-control" name="nombre" placeholder="Usuario" required >
+                        </div>
+                        <div class="col-sm 2">
+                            <input type="password" class="form-control" name="password"  placeholder="Contraseña" required>
+                        </div>
+                        <div class="col-sm 2">
+                            <button type="submit" class="btn btn-success">Ingresar</button>
+                        </div>
+                    </form>
+                </ul>
+            </div>
+            {{/if}}
+        </div>
+        <a class="navbar-brand vbl" href="http://www.tdea.edu.co/" >
+            <img src="http://www.tdea.edu.co/images/tdea/logos/logo-tdea-nuevo.png" width="150px" height="100px" alt="TdeA.edu">
+        </a>
+    </nav>
+    </span>
+</header>
+

@@ -1,0 +1,45 @@
+{{>header}}
+<div style="margin-left: 30px; margin-right: 40px" >
+
+    <h4 class="form-group text-center">Registrarse al sistema</h4>
+    <p>{{mensaje}}</p>
+    <form data-toggle="validator" style="margin-left: 30px; margin-right: 40px" action="/registrar" method="POST" enctype="multipart/form-data"> 
+            <!--Campos del CRUD inscripcion-->
+            <div class="form-group row">
+                <div class="col-sm-5">
+                <input type="number" min="0" name="documento" class="form-control input-sm" maxlength="11" placeholder="Documento Identidad" required>
+                </div>
+                    <div class="col-sm-5">
+                        <input type="email" name="email" class="form-control" aria-describedby="emailHelp"  placeholder="Correo Electronico" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-5">
+                    <input type="text" name="nombre" class="form-control" placeholder="Nombre de usuario" required>
+                </div>
+                  <div class="col-sm-5">
+                    <input type="password" name="password" class="form-control" placeholder="contraseña" required>
+                </div>
+           </div>
+
+             <div class="form-group row">
+                <div class="col-sm-5">
+                    <input type="number" name="telefono" class="form-control" placeholder="Telefono" required>
+                </div>
+                  <div class="col-sm-5">
+                    <input type="hidden" name="rol" class="form-control" value="Aspirante" required>
+                </div>
+                </div>
+                  <div class="col-sm-5">
+                      <label>Foto de Perfil</label>
+                    <input type="file" accept="image/*" name="archivo" class="form-control" required>
+                </div>
+           </div>
+            <!--Boton para validar campos-->
+            <div class="text-center">
+                <input type="submit" value="Registar" class="btn btn-success" />
+            </div>
+    </form>
+</div>
+{{>footer}}

@@ -1,0 +1,10 @@
+{{>header}}
+<div style="margin-left: 5%;margin-right: 5%;">
+    <h4 class="form-group text-center">Lista de Cursos</h4>
+    <center>
+         {{#if (equals rol 'Coordinador')}}
+            {{{modificarCursos listado}}}
+        {{/if}}
+    </center>
+</div>
+{{>footer}}
