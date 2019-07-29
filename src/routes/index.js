@@ -179,36 +179,38 @@ app.post('/inscribir',(req,res)=>{
     let {documento,id,nombre} = req.body
     let _id = documento+'|'+id
     Inscripcion.findOne({_id:_id},(err,result)=>{
-        if(err) res.render('mensaje',{mensaje:err})
+        if(err) return res.render('mensaje',{mensaje:err})
         if(result){
-             res.render('mensaje',{
+             return res.render('mensaje',{
                 mensaje:'<div class="alert alert-danger">\
                         <strong>ERROR!</strong>Ya se encuentra inscrito en este Curso.\
                         </div>'
             })
-        } 
-    })
-    Curso.findOne({id:id},(err, result)=>{
-        if(err) res.render('mensaje',{mensaje: err})
-        let curso
-        if(result) curso = result.nombre
-        let inscripcion = new Inscripcion({
-            _id: _id,
-            documento:documento,
-            estudiante: nombre,
-            id: result.id,
-            curso: curso,
-        });
-        inscripcion.save((err, result)=>{
-            if(err) res.render('mensaje',{mensaje:err}) 
-            if(result){
-                res.render('mensaje',{
-                    mensaje:'Estudiante <b>'+ result.estudiante+'</b> inscrito en <b>'+result.curso+'</b>!'
-                }) 
-            }
-        })
+        }else{
+            Curso.findOne({id:id},(err, result)=>{
+                if(err) return res.render('mensaje',{mensaje: err})
+                let curso
+                if(result) curso = result.nombre
+                let inscripcion = new Inscripcion({
+                    _id: _id,
+                    documento:documento,
+                    estudiante: nombre,
+                    id: result.id,
+                    curso: curso,
+                });
+                inscripcion.save((err, result)=>{
+                    if(err) res.render('mensaje',{mensaje:err}) 
+                    if(result){
+                        res.render('mensaje',{
+                            mensaje:'Estudiante <b>'+ result.estudiante+'</b> inscrito en <b>'+result.curso+'</b>!'
+                        }) 
+                    }
+                })
+            })
+        }
     })
 })
+
 app.get('/inscritos',(req,res)=>{
     Inscripcion.find({}).exec((err, inscritos)=>{
         if(err) return res.render('mensaje',{mensaje: err})
